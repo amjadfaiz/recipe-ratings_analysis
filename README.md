@@ -56,6 +56,36 @@ We analyzed various aspects of the dataset:
   frameborder="0"
 ></iframe>
 
+<iframe
+  src="assets/rating_distribution.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+<iframe
+  src="assets/ingredients_vs_rating.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+## **Mean Rating per Ingredient Count**
+The table below shows the average rating for recipes based on the number of ingredients:
+
+| n_ingredients | rating |
+|--------------|--------|
+| 1            | 4.23   |
+| 2            | 4.11   |
+| 3            | 4.07   |
+| 4            | 4.02   |
+| 5            | 4.00   |
+| 6            | 3.98   |
+| 7            | 3.95   |
+| 8            | 3.92   |
+| 9            | 3.90   |
+| 10           | 3.85   |
+
 
 ---
 
@@ -72,12 +102,11 @@ A permutation test was conducted:
 
 **Insert: Missingness Analysis Plots**
 <iframe
-  src="assets/file-name.html"
+  src="assets/missingness_ingredients.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
-
 ---
 
 ## **Hypothesis Testing**
@@ -93,13 +122,6 @@ We tested whether the number of ingredients in a recipe impacts the average rati
 - **p-value:** 0.314
 - **Conclusion:** Since p > 0.05, we fail to reject the null hypothesis, indicating that ingredient count does not significantly impact ratings.
 
-**Insert: Hypothesis Testing Results**
-<iframe
-  src="assets/file-name.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
 
 ---
 
@@ -123,13 +145,6 @@ We trained a **Linear Regression model** as the baseline.
 - The model performed poorly, meaning that the selected features are not strong predictors of ratings.
 - This led to further feature engineering in the final model.
 
-**Insert: Baseline Model Evaluation Table**
-<iframe
-  src="assets/file-name.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
 
 ---
 
@@ -148,13 +163,6 @@ To improve performance, additional transformations and model selection technique
 - Even with additional feature engineering, the model's predictive power remained low.
 - This suggests that user ratings might be influenced by **subjective factors not captured in the dataset**.
 
-**Insert: Final Model Performance Comparison Table**
-<iframe
-  src="assets/file-name.html"
-  width="800"
-  height="600"
-  frameborder="0"
-></iframe>
 
 ---
 
