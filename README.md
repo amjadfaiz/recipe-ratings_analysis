@@ -49,6 +49,12 @@ We analyzed various aspects of the dataset:
 - **Steps vs. Ratings:** Recipes with more steps do not necessarily receive higher ratings.
 
 **Insert: Visualizations of Rating Distribution, Ingredients, and Steps vs. Ratings**
+<iframe
+  src="assets/file-name.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ---
 
@@ -64,6 +70,12 @@ A permutation test was conducted:
 - Conclusion: The missingness in `description` is likely **not random** (NMAR). This means certain recipes are more prone to missing descriptions, which may introduce bias.
 
 **Insert: Missingness Analysis Plots**
+<iframe
+  src="assets/file-name.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ---
 
@@ -81,6 +93,12 @@ We tested whether the number of ingredients in a recipe impacts the average rati
 - **Conclusion:** Since p > 0.05, we fail to reject the null hypothesis, indicating that ingredient count does not significantly impact ratings.
 
 **Insert: Hypothesis Testing Results**
+<iframe
+  src="assets/file-name.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ---
 
@@ -105,6 +123,12 @@ We trained a **Linear Regression model** as the baseline.
 - This led to further feature engineering in the final model.
 
 **Insert: Baseline Model Evaluation Table**
+<iframe
+  src="assets/file-name.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ---
 
@@ -124,6 +148,12 @@ To improve performance, additional transformations and model selection technique
 - This suggests that user ratings might be influenced by **subjective factors not captured in the dataset**.
 
 **Insert: Final Model Performance Comparison Table**
+<iframe
+  src="assets/file-name.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ---
 
@@ -143,8 +173,6 @@ We analyzed model performance fairness across different groups.
 ### **Conclusion**
 - No significant fairness concerns were identified.
 - However, a more detailed fairness analysis incorporating user biases could be explored in the future.
-
-**Insert: Fairness Analysis Plots**
 
 ---
 
