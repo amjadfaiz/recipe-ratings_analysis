@@ -1,19 +1,41 @@
 # **Recipe Ratings Analysis**
 
 ## **Introduction**
+
 This project investigates the factors influencing recipe ratings and develops predictive models to estimate user ratings. The goal is to analyze how various recipe attributes, such as preparation time, number of ingredients, and cooking steps, impact user ratings. Additionally, a fairness analysis is conducted to evaluate whether the model performs differently across different recipe groups.
 
-We apply a structured data science workflow, including data preprocessing, exploratory data analysis (EDA), hypothesis testing, predictive modeling, and fairness assessment. The dataset consists of recipes and user interaction ratings, allowing us to derive insights and improve model accuracy.
+The project is centered around the following key question:
+**Does the number of ingredients in a recipe impact its rating?**
+
+Understanding the relationship between ingredient complexity and ratings can provide valuable insights for recipe creators, food bloggers, and online recipe platforms. If we find that ingredient count strongly influences ratings, it could help food enthusiasts optimize their recipes for better reception.
+
+### **Dataset Overview**
+The dataset consists of two main components:
+1. **Recipes Dataset**: Contains details about each recipe, including cooking time, number of ingredients, steps, and descriptions.
+2. **Interactions Dataset**: Includes user ratings for the recipes.
+
+### **Dataset Size**
+- **Number of rows in the Recipes dataset:** 231,637
+- **Number of rows in the Interactions dataset:** 1,132,776
+
+### **Relevant Columns and Descriptions**
+The following columns are relevant to our research question:
+
+| Column Name        | Description |
+|-------------------|-------------|
+| **id**            | Unique identifier for each recipe. |
+| **n_ingredients** | The total number of ingredients used in the recipe. |
+| **minutes**       | The total preparation and cooking time for the recipe. |
+| **n_steps**       | The number of steps required to prepare the recipe. |
+| **rating**        | The user rating for the recipe, ranging from 1 to 5. |
+
+These columns allow us to examine whether recipes with more ingredients tend to receive higher or lower ratings and whether other factors (e.g., cooking time and number of steps) play a role in influencing user satisfaction.
 
 ---
 
 ## **Data Cleaning and Exploratory Data Analysis**
 
 ### **Data Cleaning**
-The dataset consists of:
-1. **Recipes Dataset**: Contains details about each recipe, including cooking time, number of ingredients, steps, and descriptions.
-2. **Interactions Dataset**: Includes user ratings for the recipes.
-
 #### **Key Cleaning Steps:**
 - Ratings of **zero** were removed to avoid skewing analysis.
 - Missing values in key features such as `description` were examined and handled appropriately.
@@ -133,4 +155,3 @@ We analyzed model performance fairness across different groups.
 - **Hypothesis testing showed that the number of ingredients does not significantly impact ratings.**
 - **The predictive models had low performance, indicating that ratings may be influenced by subjective user preferences not captured in the dataset.**
 - **Fairness analysis showed no significant bias in model performance.**
-
