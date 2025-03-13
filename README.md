@@ -1,54 +1,45 @@
 # **Recipe Ratings Analysis**
 
 ## **Introduction**
-This project investigates the factors influencing recipe ratings and develops predictive models to estimate user ratings. The goal is to understand how features such as preparation time, number of ingredients, and cooking steps impact user ratings. We employ various data science techniques, including data preprocessing, exploratory data analysis (EDA), feature engineering, predictive modeling, and fairness analysis.
+This project investigates the factors influencing recipe ratings and develops predictive models to estimate user ratings. The goal is to analyze how various recipe attributes, such as preparation time, number of ingredients, and cooking steps, impact user ratings. Additionally, a fairness analysis is conducted to evaluate whether the model performs differently across different recipe groups.
 
-Understanding user preferences in online recipe ratings can provide valuable insights for recipe recommendation systems and food bloggers. However, predicting recipe ratings is a challenging task due to the subjective nature of taste and user behavior. This project aims to build a predictive model while also evaluating fairness in model performance across different recipe categories.
+We apply a structured data science workflow, including data preprocessing, exploratory data analysis (EDA), hypothesis testing, predictive modeling, and fairness assessment. The dataset consists of recipes and user interaction ratings, allowing us to derive insights and improve model accuracy.
 
 ---
 
 ## **Data Cleaning and Exploratory Data Analysis**
 
 ### **Data Cleaning**
-The dataset consists of two main components:
-1. **Recipes Dataset**: Contains details about each recipe, including ingredients, preparation time, cooking steps, and nutritional information.
-2. **Interactions Dataset**: Includes user ratings and interactions with the recipes.
+The dataset consists of:
+1. **Recipes Dataset**: Contains details about each recipe, including cooking time, number of ingredients, steps, and descriptions.
+2. **Interactions Dataset**: Includes user ratings for the recipes.
 
 #### **Key Cleaning Steps:**
-- Replaced ratings of **zero** with NaN values to avoid misleading data.
-- Handled missing values in key features such as description length.
-- Standardized text-based features and ensured numerical features were properly formatted.
+- Ratings of **zero** were removed to avoid skewing analysis.
+- Missing values in key features such as `description` were examined and handled appropriately.
+- Extracted numerical features such as `n_ingredients`, `minutes`, and `n_steps` for predictive modeling.
 
-### **Univariate Analysis**
-We conducted an analysis of individual features to understand their distribution:
-- **Rating Distribution:** Most ratings cluster around high values, indicating a potential bias towards positive ratings.
-- **Number of Ingredients:** Most recipes contain between 5 to 15 ingredients.
-- **Cooking Time:** There is a long-tail distribution, with some recipes requiring extreme durations.
+### **Exploratory Data Analysis (EDA)**
+We analyzed various aspects of the dataset:
+- **Rating Distribution:** Ratings are right-skewed, with most ratings being 4 or above.
+- **Number of Ingredients vs. Ratings:** No clear trend was observed.
+- **Cooking Time vs. Ratings:** No strong correlation was found.
+- **Steps vs. Ratings:** Recipes with more steps do not necessarily receive higher ratings.
 
-**Insert: Rating Distribution Plot**
-
-### **Bivariate Analysis and Aggregations**
-We examined relationships between key variables:
-- **Correlation between cooking time and rating:** Found no strong correlation.
-- **Analysis of recipe complexity (ingredient count) vs. rating:** More complex recipes do not necessarily receive higher ratings.
-- **Grouping by cuisine type:** Some cuisines tend to receive higher ratings than others.
-
-**Insert: EDA Visualizations**
+**Insert: Visualizations of Rating Distribution, Ingredients, and Steps vs. Ratings**
 
 ---
 
 ## **Assessment of Missingness**
 
-### **Addressing NMAR Question**
-We investigated whether missing descriptions were **Not Missing at Random (NMAR)** by analyzing whether missing descriptions correlated with ratings. If certain types of recipes were systematically missing descriptions, this could introduce bias.
+### **Addressing NMAR (Not Missing At Random) Question**
+We examined whether missing values in the `description` column were associated with rating differences.
 
 ### **Permutation Tests for Missingness**
-To formally test for missingness mechanisms, we performed permutation tests:
-- Compared mean ratings between recipes with and without missing descriptions.
-- **p-value = 0.003**, suggesting that missing descriptions are not completely random.
-
-### **Interpreting Missingness Test Results**
-- Since missing descriptions seem to be correlated with rating differences, imputing missing descriptions using average ratings or alternative methods may improve model robustness.
+A permutation test was conducted:
+- **Observed Mean Difference:** -1.47
+- **p-value:** 0.003
+- Conclusion: The missingness in `description` is likely **not random** (NMAR). This means certain recipes are more prone to missing descriptions, which may introduce bias.
 
 **Insert: Missingness Analysis Plots**
 
@@ -56,64 +47,59 @@ To formally test for missingness mechanisms, we performed permutation tests:
 
 ## **Hypothesis Testing**
 
-### **Selected Hypothesis**
-We formulated a hypothesis about the relationship between cooking time and rating:
-- **Null Hypothesis (H₀):** The number of minutes required for a recipe does not impact the average rating.
-- **Alternative Hypothesis (H₁):** Recipes with shorter cooking times have different average ratings than those with longer cooking times.
+### **Hypothesis Selection**
+We tested whether the number of ingredients in a recipe impacts the average rating.
 
-### **Test Statistic and Permutation Test**
-- We used the **difference in means** as the test statistic.
-- A permutation test was conducted by randomly shuffling cooking times and recalculating the mean difference.
-- **p-value = 0.314**, meaning we fail to reject the null hypothesis.
+- **Null Hypothesis (H₀):** The number of ingredients does not affect the rating.
+- **Alternative Hypothesis (H₁):** Recipes with more ingredients have different average ratings than those with fewer ingredients.
 
-### **Interpretation**
-- There is no strong evidence that cooking time directly impacts user ratings.
-- Other features (e.g., ingredient quality, cuisine) may be more important predictors.
+### **Permutation Test**
+- **Observed Mean Difference:** -0.0129
+- **p-value:** 0.314
+- **Conclusion:** Since p > 0.05, we fail to reject the null hypothesis, indicating that ingredient count does not significantly impact ratings.
 
 **Insert: Hypothesis Testing Results**
 
 ---
 
 ## **Framing a Prediction Problem**
-The objective is to predict recipe ratings based on available features, treating this as a **supervised regression problem**.
-
-**Feature Selection:**
-- **Number of ingredients**: Measures recipe complexity.
-- **Cooking time (minutes)**: Assesses the effort required.
-- **Number of steps**: Captures procedural complexity.
+The objective is to predict recipe ratings using available features. The problem is structured as a **supervised regression task**, where we attempt to predict `rating` based on:
+- **Number of ingredients (`n_ingredients`)**
+- **Cooking time (`minutes`)**
+- **Number of steps (`n_steps`)**
 
 ---
 
 ## **Baseline Model**
-To establish a reference, we trained a **Linear Regression model** and evaluated its performance:
+We trained a **Linear Regression model** as the baseline.
 
 **Results:**
-- **Mean Squared Error (MSE):** 1.7573
-- **Mean Absolute Error (MAE):** 0.8932
-- **R² Score:** 0.0030 (indicating weak predictive power)
+- **Mean Squared Error (MSE):** 1.7626
+- **Mean Absolute Error (MAE):** 0.8935
+- **R² Score:** -0.0000 (indicating the model has no predictive power)
 
 ### **Interpretation**
-- The baseline model performed poorly, suggesting that the selected features do not strongly predict ratings.
-- We explored additional features and more advanced models in the next step.
+- The model performed poorly, meaning that the selected features are not strong predictors of ratings.
+- This led to further feature engineering in the final model.
 
 **Insert: Baseline Model Evaluation Table**
 
 ---
 
 ## **Final Model**
-To improve performance, we implemented:
-- **Feature Engineering:** Log transformation, quantile transformation, and text-based features.
-- **Hyperparameter Tuning:** Used **GridSearchCV** for optimization.
-- **Models Tested:** Linear Regression, Random Forest, and Gradient Boosting.
+To improve performance, additional transformations and model selection techniques were applied:
+- **Feature Engineering:** Created additional features such as text-based metrics and log transformations.
+- **Hyperparameter Tuning:** Used **GridSearchCV** to optimize model parameters.
+- **Models Compared:** Linear Regression, Decision Tree, Random Forest.
 
-### **Best Model: Random Forest**
-- **MSE:** 1.9214
-- **MAE:** 0.8658
-- **R² Score:** -0.0901 (still weak, but better MAE than baseline)
+### **Best Model: Linear Regression (After Feature Engineering)**
+- **MSE:** 1.7573
+- **MAE:** 0.8932
+- **R² Score:** 0.0030 (a slight improvement over the baseline but still very weak)
 
 ### **Interpretation**
-- The model still struggles to predict ratings accurately.
-- Additional metadata (e.g., user preferences) could improve results.
+- Even with additional feature engineering, the model's predictive power remained low.
+- This suggests that user ratings might be influenced by **subjective factors not captured in the dataset**.
 
 **Insert: Final Model Performance Comparison Table**
 
@@ -121,7 +107,7 @@ To improve performance, we implemented:
 
 ## **Fairness Analysis**
 
-We assessed whether model performance was fair across different groups:
+We analyzed model performance fairness across different groups.
 
 ### **Preparation Time Category**
 - **RMSE for Short Prep Time:** 4.43
@@ -133,20 +119,18 @@ We assessed whether model performance was fair across different groups:
 - **RMSE for Complex Recipes:** 4.61
 
 ### **Conclusion**
-- No strong evidence of fairness concerns was found.
-- However, future studies should incorporate additional fairness metrics.
+- No significant fairness concerns were identified.
+- However, a more detailed fairness analysis incorporating user biases could be explored in the future.
 
 **Insert: Fairness Analysis Plots**
 
 ---
 
 ## **Conclusion**
-While our models provided insights, their predictive power remained limited. Key takeaways:
-- **Cooking time and ingredient count were not strong predictors of ratings.**
-- **Linear regression performed poorly, and even Random Forest struggled.**
-- **Fairness tests did not reveal strong bias, but more refined fairness metrics may be needed.**
+### **Key Findings:**
+- **EDA revealed that recipe complexity (ingredient count, cooking time) does not strongly correlate with ratings.**
+- **Missingness analysis suggested that missing descriptions may introduce bias.**
+- **Hypothesis testing showed that the number of ingredients does not significantly impact ratings.**
+- **The predictive models had low performance, indicating that ratings may be influenced by subjective user preferences not captured in the dataset.**
+- **Fairness analysis showed no significant bias in model performance.**
 
-### **Future Improvements**
-- Incorporate **text-based sentiment analysis** from recipe descriptions.
-- Use **user interaction data** to personalize rating predictions.
-- Experiment with **deep learning approaches (e.g., LSTMs for text analysis).**
