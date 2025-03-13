@@ -50,11 +50,12 @@ We analyzed various aspects of the dataset:
 
 **Insert: Visualizations of Rating Distribution, Ingredients, and Steps vs. Ratings**
 <iframe
-  src="assets/file-name.html"
+  src="assets/n_ingredients_histogram.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
+
 
 ---
 
