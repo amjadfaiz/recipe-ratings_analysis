@@ -126,7 +126,7 @@ We tested whether the number of ingredients in a recipe impacts the average rati
 ---
 
 ## **Framing a Prediction Problem**
-The objective is to predict recipe ratings using available features. The problem is structured as a **supervised regression task**, where we attempt to predict `rating` based on:
+The objective is to predict recipe ratings using available features where we attempt to predict `rating` based on:
 - **Number of ingredients (`n_ingredients`)**
 - **Cooking time (`minutes`)**
 - **Number of steps (`n_steps`)**
