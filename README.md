@@ -16,7 +16,7 @@ The dataset consists of two main components:
 
 ### **Dataset Size**
 - **Number of rows in the Recipes dataset:** 231,637
-- **Number of rows in the Interactions dataset:** 1,132,776
+- **Number of rows in the Interactions dataset:** 731,928
 
 ### **Relevant Columns and Descriptions**
 The following columns are relevant to our research question:
