@@ -48,7 +48,7 @@ We analyzed various aspects of the dataset:
 - **Cooking Time vs. Ratings:** No strong correlation was found.
 - **Steps vs. Ratings:** Recipes with more steps do not necessarily receive higher ratings.
 
-**Insert: Visualizations of Rating Distribution, Ingredients, and Steps vs. Ratings**
+**Visualizations of Rating Distribution, Ingredients, and Steps vs. Ratings**
 <iframe
   src="assets/n_ingredients_histogram.html"
   width="800"
@@ -100,7 +100,7 @@ A permutation test was conducted:
 - **p-value:** 0.003
 - Conclusion: The missingness in `description` is likely **not random** (NMAR). This means certain recipes are more prone to missing descriptions, which may introduce bias.
 
-**Insert: Missingness Analysis Plots**
+**Missingness Analysis Plot**
 <iframe
   src="assets/missingness_ingredients.html"
   width="800"
